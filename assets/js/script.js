@@ -70,6 +70,11 @@ if(confirmSpecial) {
   }
 }
 
+// Add from placeHolderArray until length criteria is met
+for(var i = 0; password.length < passwordLength; i++) {
+  password += placeHolderArray[i];
+}
+
 console.log(password.length);
 console.log(placeHolderArray);
 
