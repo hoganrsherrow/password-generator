@@ -3,12 +3,26 @@ var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'k', 'l',
 var numerals = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-'];
 
-//Password Generator
 
+
+var passwordLengthValidation = function() {
+  passwordLength = prompt("Welcome to Hogan's Password Generator! How many characters would you like your password to be? You must choose a number from 8 to 128");
+  passwordLength = parseInt(passwordLength);
+  // validation
+  while(passwordLength === "" || passwordLength === null || !passwordLength || passwordLength < 8 || passwordLength > 128) {
+    alert("You must enter a number from 8 to 128");
+    passwordLengthValidation();
+  }
+
+  // return length of password
+  return passwordLength;
+};
+
+//Password Generator
 var generatePassword = function() {
 
 // User interaction questions
-passwordLength = prompt("Welcome to Hogan's Password Generator. How many characters would you like your password to be?");
+passwordLength = passwordLengthValidation();
 
 confirmLowercase = confirm("Would you like to include lowercase letters?");
 
