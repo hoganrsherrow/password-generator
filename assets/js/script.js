@@ -5,7 +5,7 @@ var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', 
 
 
 
-var passwordLengthValidation = function() {
+var passwordLengthSetter = function() {
   passwordLength = prompt("Welcome to Hogan's Password Generator! How many characters would you like your password to be? You must choose a number from 8 to 128");
   passwordLength = parseInt(passwordLength);
   // validation
@@ -22,7 +22,7 @@ var passwordLengthValidation = function() {
 var generatePassword = function() {
 
 // User interaction questions
-passwordLength = passwordLengthValidation();
+passwordLength = passwordLengthSetter();
 
 confirmLowercase = confirm("Would you like to include lowercase letters?");
 
@@ -34,11 +34,21 @@ confirmSpecial = confirm("Would you like to include special characters?");
 
 console.log(passwordLength, confirmLowercase, confirmUppercase, confirmNumeric, confirmSpecial);
 
+// declare password array
+var password = [];
 
+// declare placeholder array
+var placeHolderArray = [];
 
+// lots of if statements here
+if(confirmLowercase) {
+  password.push(alphabet[0]);
+  placeHolderArray.push(alphabet);
+}
 
+console.log(placeHolderArray);
 
-return "This is where the password will go"
+return password;
 
 };
 
