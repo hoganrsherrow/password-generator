@@ -3,11 +3,30 @@ var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'k', 'l',
 var numerals = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-'];
 
+//Password Generator
+
+var generatePassword = function() {
 
 // User interaction questions
+passwordLength = prompt("Welcome to Hogan's Password Generator. How many characters would you like your password to be?");
+
+confirmLowercase = confirm("Would you like to include lowercase letters?");
+
+confirmUppercase = confirm("Would you like to include uppercase letters?");
+
+confirmNumeric = confirm("Would you like to include numbers?");
+
+confirmSpecial = confirm("Would you like to include special characters?");
+
+console.log(passwordLength, confirmLowercase, confirmUppercase, confirmNumeric, confirmSpecial);
 
 
-// Password generator
+
+
+
+return "This is where the password will go"
+
+};
 
 
 
