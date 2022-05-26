@@ -1,5 +1,6 @@
 // Arrays that hold different characters
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var capitalAlphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var numerals = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-'];
 
@@ -11,7 +12,7 @@ var passwordLengthSetter = function() {
   // validation
   while(passwordLength === "" || passwordLength === null || !passwordLength || passwordLength < 8 || passwordLength > 128) {
     alert("You must enter a number from 8 to 128");
-    passwordLengthValidation();
+    passwordLengthSetter();
   }
 
   // return length of password
@@ -34,18 +35,42 @@ confirmSpecial = confirm("Would you like to include special characters?");
 
 console.log(passwordLength, confirmLowercase, confirmUppercase, confirmNumeric, confirmSpecial);
 
-// declare password array
-var password = [];
+// declare and initialize password array
+var password = "";
 
-// declare placeholder array
+// declare and initialize placeholder array
 var placeHolderArray = [];
 
-// lots of if statements here
+/* lots of if and for statements here
+   First, confirm that the user wants to use that type of character
+   Then, concatenate onto password
+   Finally, append entire array's contents into placeholder array for later use */
 if(confirmLowercase) {
-  password.push(alphabet[0]);
-  placeHolderArray.push(alphabet);
+  password += alphabet[0];
+  for(var i = 0; i < alphabet.length; i++) {
+    placeHolderArray.push(alphabet[i]);
+  }
+}
+if(confirmUppercase) {
+  password += capitalAlphabet[0];
+  for(var i = 0; i < capitalAlphabet.length; i++) {
+    placeHolderArray.push(capitalAlphabet[i]);
+  }
+}
+if(confirmNumeric) {
+  password += numerals[0];
+  for(var i = 0; i < numerals.length; i++) {
+    placeHolderArray.push(numerals[i]);
+  }
+}
+if(confirmSpecial) {
+  password += specialCharacters[0];
+  for(var i = 0; i < specialCharacters.length; i++) {
+    placeHolderArray.push(specialCharacters[i]);
+  }
 }
 
+console.log(password.length);
 console.log(placeHolderArray);
 
 return password;
