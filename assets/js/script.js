@@ -1,17 +1,28 @@
 // Arrays that hold different characters
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var capitalAlphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-var numerals = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-'];
+const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const capitalAlphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+const numerals = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-'];
 
 // Random int generator to use for password randomness
-var randomInt = function (max) {
+const randomInt = max => {
   var randomInt = Math.floor(Math.random() * max);
 
   return randomInt;
 };
 
-var passwordLengthSetter = function () {
+// Shuffle function for placeholderArray
+const shuffle = (str) => {
+  let i = str.length, randomIndex;
+
+  while(i != 0) {
+    randomIndex = Math.floor(Math.random() * i--);
+
+    [str[i], str[randomIndex]] = [str[randomIndex], str[i]];
+  }
+}
+
+const passwordLengthSetter = () => {
   passwordLength = prompt("Welcome to Hogan's Password Generator! How many characters would you like your password to be? You must choose a number from 8 to 128");
   passwordLength = parseInt(passwordLength);
   // validation
@@ -39,7 +50,7 @@ var generatePassword = function () {
 
   confirmSpecial = confirm("Would you like to include special characters?");
 
-  console.log(passwordLength, confirmLowercase, confirmUppercase, confirmNumeric, confirmSpecial);
+  // console.log(passwordLength, confirmLowercase, confirmUppercase, confirmNumeric, confirmSpecial);
 
   // Handle someone rejecting all confirms
   if (!confirmLowercase && !confirmUppercase && !confirmNumeric && !confirmSpecial) {
@@ -48,10 +59,10 @@ var generatePassword = function () {
   }
 
   // Declare and initialize password variables
-  var password = "";
+  let password = "";
 
   // declare and initialize placeholder array
-  var placeHolderArray = [];
+  let placeHolderArray = [];
 
   /* lots of if and for statements here
      First, confirm that the user wants to use that type of character
@@ -82,14 +93,30 @@ var generatePassword = function () {
     }
   }
 
+  // ans arr
+  let passwordArr = [];
+
   // Add from placeHolderArray until length criteria is met
-  for (var i = password.length; i < passwordLength; i++) {
-    password += placeHolderArray[randomInt(placeHolderArray.length)];
+  for (var i = 0; i < passwordLength; i++) {
+    passwordArr[i] = placeHolderArray[randomInt(placeHolderArray.length)];
   }
 
-  console.log(randomInt(1), randomInt(5), randomInt(10), randomInt(1000));
-  console.log(password.length);
-  console.log(placeHolderArray);
+  // Shuffle the array
+  console.log(passwordArr);
+  shuffle(passwordArr);
+  console.log(passwordArr);
+
+  for(let i = 0; i < passwordArr.length; i++) {
+    password += passwordArr[i];
+    console.log(password);
+    console.log(passwordArr[i]);
+  }
+
+  // console.log(randomInt(1), randomInt(5), randomInt(10), randomInt(1000));
+  // console.log(password.length);
+  // console.log(placeHolderArray);
+
+  shuffle(password);
 
   return password;
 
