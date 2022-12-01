@@ -14,11 +14,11 @@ const randomInt = max => {
 // Shuffle function for password string
 shuffle = (str) => {
   let a = str.toString().split('');
-  for(let i = str.length - 1; i > 0; i--) {
+  for(let i = a.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
-    let temp = str[i];
-    str[i] = a[j];
-    str[j] = temp;
+    let temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
   }
 
   return a.join('');
@@ -88,12 +88,11 @@ const generatePassword = () => {
     password += placeHolderArray[randomInt(placeHolderArray.length)];
   }
 
+  // console.log(password);
+  // // Shuffle string
+  // let answer = shuffle(password);
   console.log(password);
-  // Shuffle string
-  let answer = shuffle(password);
-  console.log(password);
-
-  return answer;
+  return password;
 
 };
 
@@ -104,11 +103,8 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
+  console.log("here");
+  $("#password-container").append(generatePassword());
 }
 
 // Add event listener to generate button

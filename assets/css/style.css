@@ -57,6 +57,7 @@ header {
 
 #password-container {
   border: 1px dashed grey;
+  font-size: 12px;
   width: 18rem;
   height: 6rem;
 }
