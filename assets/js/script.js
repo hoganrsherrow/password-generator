@@ -11,52 +11,45 @@ const randomInt = max => {
   return randomInt;
 };
 
-// Shuffle function for placeholderArray
-const shuffle = (str) => {
-  let i = str.length, randomIndex;
-
-  while(i != 0) {
-    randomIndex = Math.floor(Math.random() * i--);
-
-    [str[i], str[randomIndex]] = [str[randomIndex], str[i]];
+// Shuffle function for password string
+shuffle = (str) => {
+  let a = str.toString().split('');
+  for(let i = str.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = str[i];
+    str[i] = a[j];
+    str[j] = temp;
   }
+
+  return a.join('');
 }
+// const shuffle = (arr) => {
+//   let i = arr.length, randomIndex;
+
+//   while(i != 0) {
+//     randomIndex = Math.floor(Math.random() * i--);
+
+//     [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]];
+//   }
+// }
 
 const passwordLengthSetter = () => {
-  passwordLength = prompt("Welcome to Hogan's Password Generator! How many characters would you like your password to be? You must choose a number from 8 to 128");
-  passwordLength = parseInt(passwordLength);
-  // validation
-  while (passwordLength === "" || passwordLength === null || !passwordLength || passwordLength < 8 || passwordLength > 128) {
-    alert("You must enter a number from 8 to 128");
-    passwordLengthSetter();
-  }
-
-  // return length of password
+  passwordLength = $("#password-length").val();
+  
   return passwordLength;
 };
 
+// Check whether boxes are checked
+const checkboxValidation = elementID => {
+  return $(`#${elementID}`).is(':checked');
+}
 
 //Password Generator
-var generatePassword = function () {
+const generatePassword = () => {
 
-  // User interaction questions
+  // Get user inputs
   passwordLength = passwordLengthSetter();
 
-  confirmLowercase = confirm("Would you like to include lowercase letters?");
-
-  confirmUppercase = confirm("Would you like to include uppercase letters?");
-
-  confirmNumeric = confirm("Would you like to include numbers?");
-
-  confirmSpecial = confirm("Would you like to include special characters?");
-
-  // console.log(passwordLength, confirmLowercase, confirmUppercase, confirmNumeric, confirmSpecial);
-
-  // Handle someone rejecting all confirms
-  if (!confirmLowercase && !confirmUppercase && !confirmNumeric && !confirmSpecial) {
-    alert("You must choose at least one type of character. Please try again.");
-    return generatePassword();
-  }
 
   // Declare and initialize password variables
   let password = "";
@@ -64,61 +57,43 @@ var generatePassword = function () {
   // declare and initialize placeholder array
   let placeHolderArray = [];
 
-  /* lots of if and for statements here
-     First, confirm that the user wants to use that type of character
-     Then, concatenate onto password
-     Finally, append entire array's contents into placeholder array for later use */
-  if (confirmLowercase) {
+  // Validation
+  if (checkboxValidation("lowercase-characters")) {
     password += alphabet[randomInt(alphabet.length)];
     for (var i = 0; i < alphabet.length; i++) {
       placeHolderArray.push(alphabet[i]);
     }
   }
-  if (confirmUppercase) {
+  if (checkboxValidation("uppercase-characters")) {
     password += capitalAlphabet[randomInt(capitalAlphabet.length)];
     for (var i = 0; i < capitalAlphabet.length; i++) {
       placeHolderArray.push(capitalAlphabet[i]);
     }
   }
-  if (confirmNumeric) {
+  if (checkboxValidation("number-characters")) {
     password += numerals[randomInt(numerals.length)];
     for (var i = 0; i < numerals.length; i++) {
       placeHolderArray.push(numerals[i]);
     }
   }
-  if (confirmSpecial) {
+  if (checkboxValidation("special-characters")) {
     password += specialCharacters[randomInt(specialCharacters.length)];
     for (var i = 0; i < specialCharacters.length; i++) {
       placeHolderArray.push(specialCharacters[i]);
     }
   }
 
-  // ans arr
-  let passwordArr = [];
-
   // Add from placeHolderArray until length criteria is met
-  for (var i = 0; i < passwordLength; i++) {
-    passwordArr[i] = placeHolderArray[randomInt(placeHolderArray.length)];
+  while(password.length < passwordLengthSetter()) {
+    password += placeHolderArray[randomInt(placeHolderArray.length)];
   }
 
-  // Shuffle the array
-  console.log(passwordArr);
-  shuffle(passwordArr);
-  console.log(passwordArr);
+  console.log(password);
+  // Shuffle string
+  let answer = shuffle(password);
+  console.log(password);
 
-  for(let i = 0; i < passwordArr.length; i++) {
-    password += passwordArr[i];
-    console.log(password);
-    console.log(passwordArr[i]);
-  }
-
-  // console.log(randomInt(1), randomInt(5), randomInt(10), randomInt(1000));
-  // console.log(password.length);
-  // console.log(placeHolderArray);
-
-  shuffle(password);
-
-  return password;
+  return answer;
 
 };
 
